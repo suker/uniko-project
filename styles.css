@@ -24,6 +24,7 @@ body {
 }
 
 .noise {
+  display: none;
   position: fixed;
   inset: 0;
   pointer-events: none;
