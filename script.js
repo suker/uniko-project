@@ -8,26 +8,253 @@ function initHomePage() {
   }
   homeInitialized = true;
 
-  const preloader = document.querySelector(".preloader");
   const site = document.querySelector(".site");
-  const counterElement = document.querySelector(".preload-percent");
-  const preloadLogo = document.querySelector(".preload-logo");
-  const preloadLeft = document.querySelector(".preload-left");
-  const preloadRight = document.querySelector(".preload-right");
+  const aboutSection = document.querySelector("#about");
+  const aboutQuote = document.querySelector(".about-quote-line");
+  const aboutCards = Array.from(document.querySelectorAll(".about-card"));
+  const servicesTitle = document.querySelector(".services-title");
+  const servicesDivider = document.querySelector(".services-divider");
+  const serviceItems = Array.from(document.querySelectorAll(".service-accordion-item"));
+  const serviceTriggers = Array.from(document.querySelectorAll(".service-accordion-trigger"));
+  const aboutCardItems = aboutCards.filter(Boolean);
+  const aboutIntroItems = [aboutQuote, ...aboutCardItems].filter(Boolean);
+  const aboutRevealItems = [servicesDivider, servicesTitle, ...serviceItems].filter(Boolean);
 
-  if (!preloader || !site || !counterElement || !preloadLogo || !preloadLeft || !preloadRight) {
+  if (!site) {
     return;
   }
 
-  function revealSite() {
-    document.body.style.overflow = "auto";
+  function initAboutIntroScrollReveal() {
+    if (!aboutSection || !aboutIntroItems.length) {
+      return;
+    }
 
-    gsap.timeline({ defaults: { ease: "power3.out" } })
-      .to(".site", {
-        autoAlpha: 1,
-        duration: 0.01,
-      })
-      .from(
+    if (prefersReducedMotion) {
+      gsap.set(aboutIntroItems, { opacity: 1, y: 0, filter: "none", clipPath: "none" });
+      return;
+    }
+
+    gsap.set(aboutCardItems, { opacity: 0, y: 22, filter: "blur(6px)" });
+    if (aboutQuote) {
+      gsap.set(aboutQuote, { opacity: 1, scaleX: 0, transformOrigin: "left center" });
+    }
+
+    let introRevealed = false;
+    const revealIntro = () => {
+      if (introRevealed) {
+        return;
+      }
+      introRevealed = true;
+
+      const timeline = gsap.timeline({ defaults: { ease: "power2.out" } });
+      if (aboutQuote) {
+        timeline.to(
+          aboutQuote,
+          {
+            scaleX: 1,
+            duration: 1.05,
+            clearProps: "transform,transformOrigin",
+          },
+          0
+        );
+      }
+
+      timeline.to(
+        aboutCardItems,
+        {
+          opacity: 1,
+          y: 0,
+          filter: "blur(0px)",
+          duration: 0.62,
+          stagger: 0.12,
+          clearProps: "opacity,transform,filter",
+        },
+        0.22
+      );
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+          if (window.scrollY <= 24) {
+            return;
+          }
+          revealIntro();
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.25, rootMargin: "0px 0px -8% 0px" }
+    );
+
+    observer.observe(aboutSection);
+
+    const onFirstScroll = () => {
+      if (window.scrollY <= 24) {
+        return;
+      }
+      const rect = aboutSection.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.92) {
+        revealIntro();
+        observer.unobserve(aboutSection);
+      }
+      window.removeEventListener("scroll", onFirstScroll);
+    };
+
+    window.addEventListener("scroll", onFirstScroll, { passive: true });
+  }
+
+  function initAboutScrollReveal() {
+    if (!aboutRevealItems.length) {
+      return;
+    }
+
+    if (prefersReducedMotion) {
+      gsap.set(aboutRevealItems, { opacity: 1, y: 0, filter: "none" });
+      return;
+    }
+
+    gsap.set(aboutRevealItems, { opacity: 0, y: 28, filter: "blur(8px)" });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const target = entry.target;
+
+          if (entry.isIntersecting) {
+            gsap.killTweensOf(target);
+            gsap.to(target, {
+              opacity: 1,
+              y: 0,
+              filter: "blur(0px)",
+              duration: 0.95,
+              ease: "power2.out",
+            });
+            return;
+          }
+
+          gsap.killTweensOf(target);
+          gsap.to(target, {
+            opacity: 0,
+            y: 18,
+            filter: "blur(6px)",
+            duration: 0.45,
+            ease: "power1.out",
+          });
+        });
+      },
+      { threshold: 0.2, rootMargin: "0px 0px -6% 0px" }
+    );
+
+    aboutRevealItems.forEach((item) => observer.observe(item));
+  }
+
+  function initAboutHoverEffects() {
+    if (prefersReducedMotion) {
+      return;
+    }
+
+    if (aboutQuote) {
+      aboutQuote.addEventListener("mouseenter", () => {
+        gsap.killTweensOf(aboutQuote);
+        gsap.fromTo(
+          aboutQuote,
+          { y: 0 },
+          {
+            y: -6,
+            duration: 0.18,
+            ease: "power2.out",
+            yoyo: true,
+            repeat: 1,
+          }
+        );
+      });
+    }
+
+    serviceTriggers.forEach((trigger) => {
+      trigger.addEventListener("mouseenter", () => {
+        gsap.killTweensOf(trigger);
+        gsap.fromTo(
+          trigger,
+          { y: 0 },
+          {
+            y: -4,
+            duration: 0.16,
+            ease: "power2.out",
+            yoyo: true,
+            repeat: 1,
+          }
+        );
+      });
+    });
+  }
+
+  function initServicesAccordion() {
+    if (!serviceItems.length) {
+      return;
+    }
+
+    const closeItem = (item) => {
+      const trigger = item.querySelector(".service-accordion-trigger");
+      const panel = item.querySelector(".service-accordion-panel");
+      if (!trigger || !panel) {
+        return;
+      }
+      item.classList.remove("is-open");
+      trigger.setAttribute("aria-expanded", "false");
+      panel.hidden = true;
+    };
+
+    const openItem = (item) => {
+      const trigger = item.querySelector(".service-accordion-trigger");
+      const panel = item.querySelector(".service-accordion-panel");
+      if (!trigger || !panel) {
+        return;
+      }
+      item.classList.add("is-open");
+      trigger.setAttribute("aria-expanded", "true");
+      panel.hidden = false;
+
+      if (!prefersReducedMotion) {
+        const rows = panel.querySelectorAll("li");
+        gsap.fromTo(
+          rows,
+          { opacity: 0, y: 12 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.28,
+            stagger: 0.02,
+            ease: "power2.out",
+            clearProps: "opacity,transform",
+          }
+        );
+      }
+    };
+
+    serviceTriggers.forEach((trigger) => {
+      trigger.addEventListener("click", () => {
+        const item = trigger.closest(".service-accordion-item");
+        if (!item) {
+          return;
+        }
+        const isOpen = item.classList.contains("is-open");
+        serviceItems.forEach(closeItem);
+        if (!isOpen) {
+          openItem(item);
+        }
+      });
+    });
+
+  }
+
+  function revealSite() {
+    gsap.set(site, { autoAlpha: 1, visibility: "visible" });
+
+    const timeline = gsap.timeline({ defaults: { ease: "power3.out" } });
+    timeline.from(
         ".main-nav .nav-link",
         {
           opacity: 0,
@@ -45,7 +272,7 @@ function initHomePage() {
           filter: "blur(8px)",
           duration: 1.05,
         },
-        "-=0.25"
+        0.08
       )
       .from(
         ".location",
@@ -58,110 +285,26 @@ function initHomePage() {
       );
   }
 
-  function setupSideTextPositions() {
-    const logoRect = preloadLogo.getBoundingClientRect();
-    const leftRect = preloadLeft.getBoundingClientRect();
-    const rightRect = preloadRight.getBoundingClientRect();
-    const viewportHalf = window.innerWidth / 2;
-    const gap = Math.max(16, window.innerWidth * 0.01);
-    const edgePadding = Math.max(24, window.innerWidth * 0.03);
-
-    const leftStart = -(logoRect.width / 2) - leftRect.width - gap;
-    const rightStart = logoRect.width / 2 + gap;
-    const leftEnd = edgePadding - viewportHalf;
-    const rightEnd = viewportHalf - rightRect.width - edgePadding;
-
-    gsap.set(preloadLeft, { x: leftStart });
-    gsap.set(preloadRight, { x: rightStart });
-
-    return { leftEnd, rightEnd };
-  }
-
-  window.addEventListener("resize", () => {
-    if (prefersReducedMotion || !preloader) {
-      return;
-    }
-
-    if (getComputedStyle(preloader).display !== "none") {
-      setupSideTextPositions();
-    }
-  });
-
   if (prefersReducedMotion) {
-    counterElement.textContent = "|100%|";
-    gsap.set(preloader, { autoAlpha: 0, display: "none" });
     gsap.set(site, { autoAlpha: 1, visibility: "visible" });
-    document.body.style.overflow = "auto";
+    gsap.set([...aboutIntroItems, ...aboutRevealItems].filter(Boolean), {
+      opacity: 1,
+      visibility: "visible",
+      y: 0,
+      filter: "none",
+    });
     return;
   }
 
-  const counter = { value: 0 };
-  const sideTargets = setupSideTextPositions();
+  if (aboutSection && aboutIntroItems.length) {
+    gsap.set(aboutIntroItems, { visibility: "visible" });
+  }
 
-  gsap.timeline({ defaults: { ease: "power3.out" } })
-    .from(".preload-logo", {
-      opacity: 0,
-      y: 26,
-      duration: 0.8,
-    })
-    .from(
-      ".preload-side",
-      {
-        opacity: 0,
-        y: 12,
-        duration: 0.55,
-        stagger: 0.08,
-      },
-      "-=0.4"
-    )
-    .to(counter, {
-      value: 100,
-      duration: 2.25,
-      ease: "none",
-      onUpdate: () => {
-        counterElement.textContent = `|${Math.round(counter.value)}%|`;
-      },
-    })
-    .to(
-      preloadLeft,
-      {
-        x: sideTargets.leftEnd,
-        duration: 2.25,
-        ease: "none",
-      },
-      "<"
-    )
-    .to(
-      preloadRight,
-      {
-        x: sideTargets.rightEnd,
-        duration: 2.25,
-        ease: "none",
-      },
-      "<"
-    )
-    .to(".preload-center", {
-      y: -14,
-      opacity: 0,
-      duration: 0.35,
-    })
-    .to(
-      ".preload-side",
-      {
-        opacity: 0,
-        y: -10,
-        duration: 0.35,
-      },
-      "<"
-    )
-    .to(preloader, {
-      autoAlpha: 0,
-      duration: 0.55,
-      onComplete: () => {
-        gsap.set(preloader, { display: "none" });
-        revealSite();
-      },
-    });
+  revealSite();
+  initAboutIntroScrollReveal();
+  initServicesAccordion();
+  initAboutHoverEffects();
+  initAboutScrollReveal();
 }
 
 if (document.documentElement.dataset.componentsReady === "true") {

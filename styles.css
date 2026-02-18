@@ -19,7 +19,7 @@ body {
   font-family: "DM Sans", sans-serif;
   background: var(--bg);
   color: var(--text);
-  overflow: hidden;
+  overflow: auto;
   overflow-x: hidden;
 }
 
@@ -43,61 +43,6 @@ body {
   transform-origin: top;
 }
 
-.preloader {
-  position: fixed;
-  inset: 0;
-  z-index: 30;
-  padding: clamp(1rem, 3vw, 2.5rem);
-  background: var(--bg);
-  overflow: hidden;
-}
-
-.preload-side {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  margin: 0;
-  font-family: "Cormorant", serif;
-  font-weight: 500;
-  font-size: clamp(1.3rem, 2vw, 2rem);
-  font-style: italic;
-  color: var(--muted);
-  white-space: nowrap;
-  transform: translateY(-50%);
-  will-change: transform;
-}
-
-.preload-left {
-  transform-origin: right center;
-}
-
-.preload-right {
-  transform-origin: left center;
-}
-
-.preload-center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-}
-
-.preload-logo {
-  width: min(64vw, 760px);
-  height: auto;
-  display: block;
-}
-
-.preload-percent {
-  margin: 0.7rem 0 0;
-  font-family: "Cormorant", serif;
-  font-weight: 500;
-  font-size: clamp(1.1rem, 1.6vw, 1.5rem);
-  font-style: italic;
-  color: var(--muted);
-}
-
 .site {
   min-height: 100vh;
   width: min(1400px, 100% - 3rem);
@@ -108,13 +53,12 @@ body {
 }
 
 .hero {
-  min-height: calc(100vh - 9rem);
-  min-height: calc(100svh - 9rem);
+  min-height: clamp(20rem, 62vh, 38rem);
   display: grid;
   align-content: center;
   justify-items: center;
   gap: 1.4rem;
-  padding-bottom: 12vh;
+  padding-bottom: clamp(0.8rem, 2.2vh, 1.8rem);
 }
 
 .brand {
@@ -131,46 +75,187 @@ body {
 .location {
   margin: 0;
   margin-top: clamp(1.1rem, 3vh, 2.2rem);
-  margin-left: clamp(12rem, 48vw, 47rem);
+  text-align: center;
   color: var(--muted);
   font-size: clamp(1.2rem, 2.1vw, 2.9rem);
+}
+
+.home-about {
+  margin-top: clamp(0.5rem, 1.8vh, 1.4rem);
+  padding-bottom: clamp(3rem, 8vh, 6.2rem);
+  text-align: center;
+}
+
+.about-main {
+  margin-top: 0.15rem;
+  padding: 0.25rem 2.2rem 0;
+  padding-bottom: clamp(3rem, 8vh, 5.2rem);
+}
+
+.about-quote {
+  margin: 0;
+  margin-inline: auto;
+  max-width: 100%;
+  font-family: "Cormorant", serif;
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 0.95;
+  font-size: clamp(2.2rem, 6.8vw, 5.6rem);
+  color: #141413;
+}
+
+.about-quote-line {
+  display: inline-block;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.about-quote-line span + span {
+  margin-left: 0.25ch;
+}
+
+.about-copy {
+  margin-top: clamp(2rem, 5.2vh, 4rem);
+  margin-inline: auto;
+  width: min(46rem, 92vw);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1rem, 2.1vw, 1.8rem);
+}
+
+.about-card {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  font-family: "Inria Sans", sans-serif;
+  color: #2b2b2a;
+  font-style: italic;
+  font-size: clamp(1.5rem, 2.4vw, 2.9rem);
+  line-height: 1.24;
+}
+
+.about-card p {
+  margin: 0;
+}
+
+.about-card strong {
+  font-weight: 700;
+}
+
+.services-section {
+  padding: 0 2.2rem;
+  margin-top: clamp(2.8rem, 8vh, 6rem);
+}
+
+.services-title {
+  margin: 0;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-size: clamp(2.2rem, 5.4vw, 4.4rem);
+}
+
+.services-accordion {
+  margin-top: clamp(1.5rem, 3.5vh, 2.8rem);
+  margin-inline: auto;
+  max-width: min(1180px, 96vw);
+  border-top: 1px solid rgba(15, 15, 15, 0.2);
+}
+
+.service-accordion-item {
+  border-bottom: 1px solid rgba(15, 15, 15, 0.2);
+}
+
+.service-accordion-heading {
+  margin: 0;
+}
+
+.service-accordion-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border: 0;
+  padding: clamp(1rem, 2.6vw, 1.4rem) 0;
+  background: transparent;
+  color: #242422;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 300;
+  font-size: clamp(2rem, 5.3vw, 3.95rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-align: left;
+  cursor: pointer;
+  transition: color 180ms ease;
+}
+
+.service-accordion-item.is-open .service-accordion-trigger {
+  color: #151514;
+}
+
+.service-accordion-arrow {
+  font-size: clamp(2rem, 3.8vw, 3rem);
+  color: rgba(20, 20, 18, 0.38);
+  transform: rotate(0deg);
+  transition: transform 220ms ease, color 220ms ease;
+}
+
+.service-accordion-item.is-open .service-accordion-arrow {
+  color: rgba(20, 20, 18, 0.9);
+  transform: rotate(45deg);
+}
+
+.service-accordion-panel {
+  padding: 0 0 clamp(1.25rem, 2.5vw, 1.8rem);
+}
+
+.service-accordion-keywords {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1rem, 4vw, 4.2rem);
+}
+
+.service-accordion-keywords ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.32rem;
+}
+
+.service-accordion-keywords li {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 300;
+  font-size: clamp(1rem, 1.65vw, 2rem);
+  line-height: 1.2;
+  color: #2c2c2a;
+}
+
+.services-divider {
+  margin-top: clamp(2.8rem, 6vh, 4.6rem);
+  border-top: 1px solid rgba(15, 15, 15, 0.28);
 }
 
 @media (max-width: 1024px) {
   .site {
     width: min(1400px, 100% - 2rem);
   }
-
-  .preload-logo {
-    width: min(78vw, 760px);
-  }
 }
 
 @media (max-width: 780px) {
-  .preload-logo {
-    width: min(90vw, 620px);
-  }
-
-  .preload-side {
-    top: 58%;
-    font-size: clamp(1.05rem, 5vw, 1.45rem);
-  }
-
-  .preload-percent {
-    margin-top: 0.45rem;
-  }
-
   .site {
     width: min(1400px, 100% - 1.25rem);
   }
 
   .hero {
-    min-height: calc(100vh - 6rem);
-    min-height: calc(100svh - 6rem);
+    min-height: clamp(16rem, 46vh, 24rem);
     justify-items: center;
     text-align: center;
     gap: 0.9rem;
-    padding-bottom: 1.8rem;
+    padding-bottom: 1rem;
   }
 
   .brand {
@@ -178,22 +263,66 @@ body {
   }
 
   .location {
-    margin-left: 0;
     text-align: center;
     font-size: clamp(1.05rem, 4.8vw, 1.45rem);
+  }
+
+  .about-main {
+    padding: 0.25rem 0.9rem 0;
+  }
+
+  .about-quote {
+    margin-inline: auto;
+    max-width: 100%;
+    font-size: clamp(2rem, 12vw, 3rem);
+    line-height: 1;
+  }
+
+  .about-copy {
+    margin-inline: auto;
+    max-width: 100%;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .about-card {
+    padding: 0;
+    font-size: clamp(1.35rem, 6.2vw, 2rem);
+  }
+
+  .services-section {
+    padding: 0 0.9rem;
+    margin-top: 2.4rem;
+  }
+
+  .services-accordion {
+    max-width: 100%;
+  }
+
+  .service-accordion-trigger {
+    font-size: clamp(1.75rem, 9.5vw, 2.95rem);
+    padding: 0.8rem 0;
+  }
+
+  .service-accordion-arrow {
+    font-size: clamp(1.55rem, 7vw, 2.2rem);
+  }
+
+  .service-accordion-keywords {
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+  }
+
+  .service-accordion-keywords li {
+    font-size: clamp(1rem, 4.6vw, 1.35rem);
+  }
+
+  .services-divider {
+    margin-top: 2rem;
   }
 }
 
 @media (max-width: 520px) {
-  .preload-side {
-    top: 61%;
-    font-size: clamp(0.95rem, 5.2vw, 1.2rem);
-  }
-
-  .preload-logo {
-    width: min(92vw, 520px);
-  }
-
   .hero {
     gap: 0.7rem;
   }

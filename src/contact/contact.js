@@ -8,13 +8,12 @@ function initContactValidation() {
   }
   form.dataset.validationReady = "true";
 
-  const company = form.querySelector("#company");
   const fullname = form.querySelector("#fullname");
   const email = form.querySelector("#email");
   const phone = form.querySelector("#phone");
   const feedback = form.querySelector(".contact-form-feedback");
 
-  if (!company || !fullname || !email || !phone || !feedback) {
+  if (!fullname || !email || !phone || !feedback) {
     return;
   }
 
@@ -51,17 +50,14 @@ function initContactValidation() {
   };
 
   const validate = () => {
-    [company, fullname, email, phone].forEach(clearFieldError);
+    [fullname, email, phone].forEach(clearFieldError);
     feedback.textContent = "";
 
     let isValid = true;
-    const hasCompany = company.value.trim().length > 0;
     const hasFullname = fullname.value.trim().length > 0;
 
-    if (!hasCompany && !hasFullname) {
-      const nameMessage = "Debes rellenar nombre de empresa o nombre completo.";
-      setFieldError(company, nameMessage);
-      setFieldError(fullname, nameMessage);
+    if (!hasFullname) {
+      setFieldError(fullname, "El nombre completo es obligatorio.");
       isValid = false;
     }
 
@@ -100,7 +96,7 @@ function initContactValidation() {
     feedback.textContent = "";
   });
 
-  [company, fullname, email, phone].forEach((input) => {
+  [fullname, email, phone].forEach((input) => {
     input.addEventListener("input", () => {
       clearFieldError(input);
       if (feedback.textContent === "Revisa los campos marcados antes de enviar.") {

@@ -19,19 +19,48 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(1.2rem, 3vw, 3rem);
   align-items: start;
+  text-align: center;
 }
 
 .about-footer-col {
   display: grid;
   align-content: start;
+  justify-items: center;
   gap: 0.28rem;
   font-size: clamp(1.02rem, 1.25vw, 1.55rem);
 }
 
 .about-footer-col a {
+  position: relative;
   margin: 0;
   color: #262625;
   text-decoration: none;
+  transition: color 180ms ease, transform 180ms ease;
+}
+
+.about-footer-col a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.08rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0;
+  transform: scaleX(0.86);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.about-footer-col a:hover,
+.about-footer-col a:focus-visible {
+  color: #111;
+  transform: translateY(-1px);
+}
+
+.about-footer-col a:hover::after,
+.about-footer-col a:focus-visible::after {
+  opacity: 0.55;
+  transform: scaleX(1);
 }
 
 .about-footer-brand {
@@ -42,22 +71,53 @@
   width: min(100%, 1200px);
   height: auto;
   display: block;
+  margin-inline: auto;
 }
 
 .about-footer-bottom {
   margin-top: clamp(0.9rem, 2.2vh, 1.7rem);
+  width: min(100%, 1200px);
+  margin-inline: auto;
   display: flex;
   justify-content: space-between;
-  gap: 1rem;
+  align-items: flex-start;
+  gap: 1.5rem;
   color: #40403e;
-  font-size: clamp(1.08rem, 1.35vw, 1.65rem);
+  font-size: clamp(0.72rem, 0.86vw, 0.9rem);
 }
 
 .about-footer-bottom p {
   margin: 0;
 }
 
-.footer-reveal {
+.about-footer-note {
+  display: grid;
+  gap: 0.02rem;
+  text-align: left;
+}
+
+.about-footer-note-left {
+  justify-items: start;
+}
+
+.about-footer-note-right {
+  text-align: right;
+  justify-items: end;
+  padding-top: 0.45rem;
+}
+
+.about-footer-note-tagline {
+  font-family: "Cormorant", serif;
+  font-style: italic;
+  letter-spacing: 0.015em;
+  font-size: clamp(0.82rem, 1vw, 1rem);
+}
+
+.about-footer-note-brand {
+  white-space: nowrap;
+}
+
+.about-footer .footer-reveal {
   opacity: 0;
 }
 
@@ -82,9 +142,21 @@
   }
 
   .about-footer-bottom {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.6rem;
-    font-size: clamp(1rem, 4.2vw, 1.15rem);
+    align-items: flex-end;
+    gap: 0.9rem;
+    font-size: clamp(0.66rem, 2.8vw, 0.82rem);
   }
+
+  .about-footer-note {
+    gap: 0.04rem;
+  }
+
+  .about-footer-note-right {
+    padding-top: 0;
+  }
+
+  .about-footer-note-tagline {
+    font-size: clamp(0.74rem, 2.7vw, 0.92rem);
+  }
+
 }

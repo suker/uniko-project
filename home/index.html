@@ -11,28 +11,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@1,500&family=DM+Sans:wght@400;500&family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:wght@500&family=Playfair+Display:ital,wght@1,500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@1,500&family=DM+Sans:wght@400;500&family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:wght@500&family=Playfair+Display:ital,wght@1,500&family=Space+Grotesk:wght@300;400;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body data-page="home">
     <div class="noise" aria-hidden="true"></div>
-    <section class="preloader" aria-label="Loading screen">
-      <p class="preload-side preload-left">Loading</p>
-      <div class="preload-center">
-        <img
-          class="preload-logo"
-          src="/assets/uniko-studio.svg"
-          alt="Uniko Studio"
-          width="1200"
-          height="260"
-        />
-        <p class="preload-percent">|0%|</p>
-      </div>
-      <p class="preload-side preload-right">in progress</p>
-    </section>
-
     <main class="site" id="top">
       <div data-component="navbar"></div>
 
@@ -48,6 +33,165 @@
         </h1>
         <p class="location">based in England</p>
       </section>
+
+      <section class="home-about" id="about" aria-label="About">
+        <section class="about-main">
+          <blockquote class="about-quote" id="about-title">
+            <p class="about-quote-line">
+              <span data-i18n="about.title1">“Dos voces,</span>
+              <span data-i18n="about.title2">una identidad única”</span>
+            </p>
+          </blockquote>
+
+          <div class="about-copy">
+            <article class="about-card">
+              <p data-i18n-html="about.copy1">
+                uniko studio es un estudio de diseño donde la <strong>estrategia</strong> y la
+                <strong>emoción</strong> se encuentran.
+              </p>
+            </article>
+            <article class="about-card">
+              <p data-i18n="about.copy2">
+                Trabajamos de forma colaborativa, el pensamiento estratégico guía la creatividad.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <div class="services-divider"></div>
+        <section class="services-section" aria-labelledby="services-title">
+          <h3 class="services-title" id="services-title" data-i18n="about.servicesTitle">SERVICIOS</h3>
+
+          <div class="services-accordion" data-services-accordion>
+            <article class="service-accordion-item">
+              <h4 class="service-accordion-heading">
+                <button
+                  type="button"
+                  class="service-accordion-trigger"
+                  id="service-trigger-branding"
+                  aria-expanded="false"
+                  aria-controls="service-panel-branding"
+                >
+                  <span data-i18n="about.service1">Estrategia de marca</span>
+                  <span class="service-accordion-arrow" aria-hidden="true">↗</span>
+                </button>
+              </h4>
+              <div
+                class="service-accordion-panel"
+                id="service-panel-branding"
+                role="region"
+                aria-labelledby="service-trigger-branding"
+                hidden
+              >
+                <div class="service-accordion-keywords">
+                  <ul data-i18n-html="home.services.branding.col1">
+                    <li>Posicionamiento</li><li>Diferenciación</li>
+                  </ul>
+                  <ul data-i18n-html="home.services.branding.col2">
+                    <li>Branding estratégico</li><li>Naming</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+
+            <article class="service-accordion-item">
+              <h4 class="service-accordion-heading">
+                <button
+                  type="button"
+                  class="service-accordion-trigger"
+                  id="service-trigger-web"
+                  aria-expanded="false"
+                  aria-controls="service-panel-web"
+                >
+                  <span data-i18n="about.service2">Experiencia de marca</span>
+                  <span class="service-accordion-arrow" aria-hidden="true">↗</span>
+                </button>
+              </h4>
+              <div
+                class="service-accordion-panel"
+                id="service-panel-web"
+                role="region"
+                aria-labelledby="service-trigger-web"
+                hidden
+              >
+                <div class="service-accordion-keywords">
+                  <ul data-i18n-html="home.services.web.col1">
+                    <li>UX/UI</li><li>Diseño web editorial</li>
+                  </ul>
+                  <ul data-i18n-html="home.services.web.col2">
+                    <li>Dirección visual digital</li><li>E-commerce branding</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+
+            <article class="service-accordion-item">
+              <h4 class="service-accordion-heading">
+                <button
+                  type="button"
+                  class="service-accordion-trigger"
+                  id="service-trigger-packaging"
+                  aria-expanded="false"
+                  aria-controls="service-panel-packaging"
+                >
+                  <span data-i18n="about.service3">Diseño digital</span>
+                  <span class="service-accordion-arrow" aria-hidden="true">↗</span>
+                </button>
+              </h4>
+              <div
+                class="service-accordion-panel"
+                id="service-panel-packaging"
+                role="region"
+                aria-labelledby="service-trigger-packaging"
+                hidden
+              >
+                <div class="service-accordion-keywords">
+                  <ul data-i18n-html="home.services.packaging.col1">
+                    <li>Packaging</li><li>Jerarquía visual</li>
+                  </ul>
+                  <ul data-i18n-html="home.services.packaging.col2">
+                    <li>Producción gráfica</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+
+            <article class="service-accordion-item">
+              <h4 class="service-accordion-heading">
+                <button
+                  type="button"
+                  class="service-accordion-trigger"
+                  id="service-trigger-comunicacion"
+                  aria-expanded="false"
+                  aria-controls="service-panel-comunicacion"
+                >
+                  <span data-i18n="about.service4">Diseño de marca</span>
+                  <span class="service-accordion-arrow" aria-hidden="true">↗</span>
+                </button>
+              </h4>
+              <div
+                class="service-accordion-panel"
+                id="service-panel-comunicacion"
+                role="region"
+                aria-labelledby="service-trigger-comunicacion"
+                hidden
+              >
+                <div class="service-accordion-keywords">
+                  <ul data-i18n-html="home.services.comms.col1">
+                    <li>Storytelling de marca</li><li>Imagen corporativa</li>
+                  </ul>
+                  <ul data-i18n-html="home.services.comms.col2">
+                    <li>Sistema visual</li><li>Estilo gráfico</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </section>
+      </section>
+
+      <div data-component="footer" data-footer-bg="#fffff0"></div>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>

@@ -6,11 +6,10 @@
   const dict = {
     es: {
       "nav.home": "Home",
-      "nav.portfolios": "Portafolios",
+      "nav.portfolios": "Portfolios",
       "nav.emile": "Emile",
       "nav.pascale": "Pascale",
       "nav.uniko": "Uniko",
-      "nav.about": "Acerca de",
       "nav.contact": "Contacto",
       "footer.home": "Home",
       "footer.about": "Acerca de",
@@ -21,10 +20,8 @@
       "footer.privacy": "Política de Privacidad",
       "footer.terms": "Términos y Condiciones",
       "footer.cookies": "Cookies",
-      "footer.brandline": "uniko studio<br />© 2026",
-      "footer.tagline": "Dos voces, una identidad",
-      "home.loading": "Cargando",
-      "home.progress": "en progreso",
+      "footer.brandline": "uniko studio © 2026",
+      "footer.tagline": "Dos voces, una identidad única",
       "home.location": "con sede en Inglaterra",
       "about.title1": "“Dos voces,",
       "about.title2": "una identidad única”",
@@ -37,6 +34,31 @@
       "about.service2": "Experiencia de marca",
       "about.service3": "Diseño digital",
       "about.service4": "Diseño de marca",
+      "home.services.branding.title": "Branding",
+      "home.services.branding.col1":
+        "<li>Posicionamiento</li><li>Diferenciación</li>",
+      "home.services.branding.col2":
+        "<li>Branding estratégico</li><li>Naming</li>",
+      "home.services.web.title": "Web & Digital",
+      "home.services.web.col1":
+        "<li>UX/UI</li><li>Diseño web editorial</li>",
+      "home.services.web.col2":
+        "<li>Dirección visual digital</li><li>E-commerce branding</li>",
+      "home.services.packaging.title": "Packaging",
+      "home.services.packaging.col1":
+        "<li>Packaging</li><li>Jerarquía visual</li>",
+      "home.services.packaging.col2":
+        "<li>Producción gráfica</li>",
+      "home.services.comms.title": "Comunicación",
+      "home.services.comms.col1":
+        "<li>Storytelling de marca</li><li>Imagen corporativa</li>",
+      "home.services.comms.col2":
+        "<li>Sistema visual</li><li>Estilo gráfico</li>",
+      "home.services.consulting.title": "Consultoría estratégica",
+      "home.services.consulting.col1":
+        "<li>Auditoría de marca</li><li>Diagnóstico competitivo</li><li>Posicionamiento</li><li>Roadmap creativo</li><li>Customer journey</li>",
+      "home.services.consulting.col2":
+        "<li>Arquitectura de marca</li><li>Estrategia de lanzamiento</li><li>Evolución de identidad</li><li>Coherencia de touchpoints</li><li>Mentoría de equipos</li>",
       "emile.role": "Estrategia y Diseño Web",
       "emile.copy1":
         "Emile Lord Ayotte es diseñador<br />digital con enfoque estratégico.",
@@ -126,7 +148,6 @@
       "nav.emile": "Emile",
       "nav.pascale": "Pascale",
       "nav.uniko": "Uniko",
-      "nav.about": "About",
       "nav.contact": "Contact",
       "footer.home": "Home",
       "footer.about": "About",
@@ -137,10 +158,8 @@
       "footer.privacy": "Privacy Policy",
       "footer.terms": "Terms & Conditions",
       "footer.cookies": "Cookies",
-      "footer.brandline": "uniko studio<br />© 2026",
-      "footer.tagline": "Two voices, one identity",
-      "home.loading": "Loading",
-      "home.progress": "in progress",
+      "footer.brandline": "uniko studio © 2026",
+      "footer.tagline": "Two voices, one unique identity",
       "home.location": "based in England",
       "about.title1": "“Two voices,",
       "about.title2": "one unique identity”",
@@ -153,6 +172,31 @@
       "about.service2": "Brand experience",
       "about.service3": "Digital design",
       "about.service4": "Brand design",
+      "home.services.branding.title": "Branding",
+      "home.services.branding.col1":
+        "<li>Positioning</li><li>Differentiation</li>",
+      "home.services.branding.col2":
+        "<li>Strategic branding</li><li>Naming</li>",
+      "home.services.web.title": "Web & Digital",
+      "home.services.web.col1":
+        "<li>UX/UI</li><li>Editorial web design</li>",
+      "home.services.web.col2":
+        "<li>Digital visual direction</li><li>E-commerce branding</li>",
+      "home.services.packaging.title": "Packaging",
+      "home.services.packaging.col1":
+        "<li>Packaging</li><li>Visual hierarchy</li>",
+      "home.services.packaging.col2":
+        "<li>Print production</li>",
+      "home.services.comms.title": "Communication",
+      "home.services.comms.col1":
+        "<li>Brand storytelling</li><li>Corporate image</li>",
+      "home.services.comms.col2":
+        "<li>Visual system</li><li>Graphic style</li>",
+      "home.services.consulting.title": "Strategic Consulting",
+      "home.services.consulting.col1":
+        "<li>Brand audit</li><li>Competitive diagnosis</li><li>Positioning</li><li>Creative roadmap</li><li>Customer journey</li>",
+      "home.services.consulting.col2":
+        "<li>Brand architecture</li><li>Launch strategy</li><li>Identity evolution</li><li>Touchpoint coherence</li><li>Team mentoring</li>",
       "emile.role": "Strategy & Web Design",
       "emile.copy1":
         "Emile Lord Ayotte is a digital designer<br />with a strategic approach.",
@@ -240,8 +284,6 @@
 
   const pageRules = {
     home: [
-      { selector: ".preload-left", key: "home.loading" },
-      { selector: ".preload-right", key: "home.progress" },
       { selector: ".location", key: "home.location" },
     ],
     about: [
