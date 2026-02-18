@@ -11,6 +11,7 @@ function initHomePage() {
   const site = document.querySelector(".site");
   const aboutSection = document.querySelector("#about");
   const aboutQuote = document.querySelector(".about-quote-line");
+  const aboutQuoteSpans = aboutQuote ? Array.from(aboutQuote.querySelectorAll("span")) : [];
   const aboutCards = Array.from(document.querySelectorAll(".about-card"));
   const servicesTitle = document.querySelector(".services-title");
   const servicesDivider = document.querySelector(".services-divider");
@@ -36,8 +37,50 @@ function initHomePage() {
 
     gsap.set(aboutCardItems, { opacity: 0, y: 22, filter: "blur(6px)" });
     if (aboutQuote) {
-      gsap.set(aboutQuote, { opacity: 1, scaleX: 0, transformOrigin: "left center" });
+      gsap.set(aboutQuote, { opacity: 0 });
     }
+
+    const runQuoteTypewriter = () => {
+      if (!aboutQuote || !aboutQuoteSpans.length || aboutQuote.dataset.typewriterDone === "true") {
+        return;
+      }
+
+      const spanTexts = aboutQuoteSpans.map((span) => span.textContent);
+      gsap.set(aboutQuote, { opacity: 1 });
+      aboutQuote.classList.add("is-typing");
+      aboutQuoteSpans.forEach((span) => {
+        span.textContent = "";
+      });
+
+      let spanIndex = 0;
+      let charIndex = 0;
+
+      const typeNextChar = () => {
+        if (spanIndex >= aboutQuoteSpans.length) {
+          aboutQuote.classList.remove("is-typing");
+          aboutQuote.dataset.typewriterDone = "true";
+          return;
+        }
+
+        const text = spanTexts[spanIndex];
+        const nextLength = charIndex + 1;
+        aboutQuoteSpans[spanIndex].textContent = text.slice(0, nextLength);
+        charIndex += 1;
+
+        if (charIndex >= text.length) {
+          spanIndex += 1;
+          charIndex = 0;
+        }
+
+        const isPunctuation = /[.,;:!?'"»”“]/.test(
+          aboutQuoteSpans[Math.max(spanIndex - 1, 0)].textContent.slice(-1)
+        );
+        const delay = isPunctuation ? 58 : 42;
+        window.setTimeout(typeNextChar, delay);
+      };
+
+      window.setTimeout(typeNextChar, 120);
+    };
 
     let introRevealed = false;
     const revealIntro = () => {
@@ -48,15 +91,7 @@ function initHomePage() {
 
       const timeline = gsap.timeline({ defaults: { ease: "power2.out" } });
       if (aboutQuote) {
-        timeline.to(
-          aboutQuote,
-          {
-            scaleX: 1,
-            duration: 1.05,
-            clearProps: "transform,transformOrigin",
-          },
-          0
-        );
+        runQuoteTypewriter();
       }
 
       timeline.to(

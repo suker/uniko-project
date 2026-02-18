@@ -111,8 +111,30 @@ body {
   white-space: nowrap;
 }
 
+.about-quote-line.is-typing::after {
+  content: "";
+  display: inline-block;
+  width: 0.06em;
+  height: 0.86em;
+  margin-left: 0.08em;
+  vertical-align: -0.08em;
+  background: currentColor;
+  animation: type-caret-blink 0.9s steps(1, end) infinite;
+}
+
 .about-quote-line span + span {
   margin-left: 0.25ch;
+}
+
+@keyframes type-caret-blink {
+  0%,
+  48% {
+    opacity: 1;
+  }
+  49%,
+  100% {
+    opacity: 0;
+  }
 }
 
 .about-copy {
