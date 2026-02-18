@@ -40,12 +40,18 @@ function initHomePage() {
       gsap.set(aboutQuote, { opacity: 0 });
     }
 
-    const runQuoteTypewriter = () => {
+    const runQuoteTypewriter = (onComplete) => {
       if (!aboutQuote || !aboutQuoteSpans.length || aboutQuote.dataset.typewriterDone === "true") {
-        return;
+        if (typeof onComplete === "function") {
+          onComplete();
+        }
+        return 0;
       }
 
       const spanTexts = aboutQuoteSpans.map((span) => span.textContent);
+      const allText = spanTexts.join(" ");
+      const punctuationCount = (allText.match(/[.,;:!?'"»”“]/g) || []).length;
+      const estimatedDuration = 120 + allText.length * 44 + punctuationCount * 18;
       gsap.set(aboutQuote, { opacity: 1 });
       aboutQuote.classList.add("is-typing");
       aboutQuoteSpans.forEach((span) => {
@@ -59,6 +65,9 @@ function initHomePage() {
         if (spanIndex >= aboutQuoteSpans.length) {
           aboutQuote.classList.remove("is-typing");
           aboutQuote.dataset.typewriterDone = "true";
+          if (typeof onComplete === "function") {
+            onComplete();
+          }
           return;
         }
 
@@ -75,11 +84,48 @@ function initHomePage() {
         const isPunctuation = /[.,;:!?'"»”“]/.test(
           aboutQuoteSpans[Math.max(spanIndex - 1, 0)].textContent.slice(-1)
         );
-        const delay = isPunctuation ? 58 : 42;
+        const delay = isPunctuation ? 62 : 44;
         window.setTimeout(typeNextChar, delay);
       };
 
       window.setTimeout(typeNextChar, 120);
+      return estimatedDuration;
+    };
+
+    let cardsScrollRevealReady = false;
+    const initCardsScrollReveal = () => {
+      if (cardsScrollRevealReady || !aboutCardItems.length) {
+        return;
+      }
+      cardsScrollRevealReady = true;
+
+      if (!window.ScrollTrigger) {
+        gsap.to(aboutCardItems, {
+          opacity: 1,
+          y: 0,
+          filter: "blur(0px)",
+          duration: 0.72,
+          stagger: 0.15,
+          ease: "power3.out",
+          clearProps: "opacity,transform,filter",
+        });
+        return;
+      }
+
+      aboutCardItems.forEach((card, index) => {
+        gsap.to(card, {
+          opacity: 1,
+          y: 0,
+          filter: "blur(0px)",
+          ease: "none",
+          scrollTrigger: {
+            trigger: card,
+            start: index === 0 ? "top 92%" : "top 90%",
+            end: index === 0 ? "top 62%" : "top 60%",
+            scrub: 0.55,
+          },
+        });
+      });
     };
 
     let introRevealed = false;
@@ -88,24 +134,14 @@ function initHomePage() {
         return;
       }
       introRevealed = true;
-
-      const timeline = gsap.timeline({ defaults: { ease: "power2.out" } });
       if (aboutQuote) {
-        runQuoteTypewriter();
+        runQuoteTypewriter(() => {
+          // Give the quote a beat after finishing before cards begin to reveal.
+          window.setTimeout(initCardsScrollReveal, 320);
+        });
+        return;
       }
-
-      timeline.to(
-        aboutCardItems,
-        {
-          opacity: 1,
-          y: 0,
-          filter: "blur(0px)",
-          duration: 0.62,
-          stagger: 0.12,
-          clearProps: "opacity,transform,filter",
-        },
-        0.22
-      );
+      window.setTimeout(initCardsScrollReveal, 320);
     };
 
     const observer = new IntersectionObserver(

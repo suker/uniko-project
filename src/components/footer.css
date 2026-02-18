@@ -75,7 +75,7 @@
 }
 
 .about-footer-bottom {
-  margin-top: clamp(0.9rem, 2.2vh, 1.7rem);
+  margin-top: clamp(0.1rem, 0.6vh, 0.35rem);
   width: min(100%, 1200px);
   margin-inline: auto;
   display: flex;
@@ -103,7 +103,7 @@
 .about-footer-note-right {
   text-align: right;
   justify-items: end;
-  padding-top: 0.45rem;
+  padding-top: 0;
 }
 
 .about-footer-note-tagline {

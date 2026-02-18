@@ -70,7 +70,7 @@
       "pascale.copy2":
         "Trabaja desde la intuición, la estética,<br />narrativa visual y diseño como<br />herramienta para generar conexión",
       "contact.title": "HABLEMOS",
-      "contact.subtitle": "Construyamos algo significativo.",
+      "contact.subtitle": "Construyamos algo significativo",
       "contact.fullname": "Nombre completo*",
       "contact.email": "Dirección de correo electrónico*",
       "contact.phone": "Número de teléfono*",
