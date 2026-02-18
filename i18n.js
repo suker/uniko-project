@@ -71,7 +71,6 @@
         "Trabaja desde la intuición, la estética,<br />narrativa visual y diseño como<br />herramienta para generar conexión",
       "contact.title": "HABLEMOS",
       "contact.subtitle": "Construyamos algo significativo.",
-      "contact.company": "Nombre de empresa*",
       "contact.fullname": "Nombre completo*",
       "contact.email": "Dirección de correo electrónico*",
       "contact.phone": "Número de teléfono*",
@@ -209,7 +208,6 @@
         "She works through intuition and aesthetics,<br />using visual narrative and design as a<br />tool to build connection.",
       "contact.title": "LET'S TALK",
       "contact.subtitle": "Let's build something meaningful.",
-      "contact.company": "Company name*",
       "contact.fullname": "Full name*",
       "contact.email": "Email address*",
       "contact.phone": "Phone number*",
@@ -310,7 +308,6 @@
     contact: [
       { selector: "#contact-title", key: "contact.title" },
       { selector: ".contact-subtitle", key: "contact.subtitle" },
-      { selector: "label[for='company']", key: "contact.company" },
       { selector: "label[for='fullname']", key: "contact.fullname" },
       { selector: "label[for='email']", key: "contact.email" },
       { selector: "label[for='phone']", key: "contact.phone" },

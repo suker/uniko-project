@@ -16,10 +16,15 @@
   opacity: 0;
   visibility: hidden;
   padding: clamp(2.2rem, 6vh, 4.6rem) clamp(1.2rem, 3vw, 2.2rem) 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .contact-header {
   max-width: 980px;
+  width: 100%;
+  text-align: center;
 }
 
 .contact-title {
@@ -47,13 +52,15 @@
   margin-top: clamp(2.2rem, 7vh, 5rem);
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: clamp(1.2rem, 2.5vw, 2.2rem) clamp(1.2rem, 3vw, 3rem);
+  gap: clamp(1.4rem, 2.4vw, 2rem) clamp(1.6rem, 3.2vw, 3.2rem);
   max-width: 1200px;
+  width: 100%;
+  margin-inline: auto;
 }
 
 .contact-field {
   display: grid;
-  gap: 0.5rem;
+  gap: 0.65rem;
 }
 
 .contact-field label {
@@ -70,19 +77,19 @@
   color: #222;
   font-family: "Inria Sans", sans-serif;
   font-size: clamp(1rem, 1.4vw, 1.25rem);
-  padding: 0.15rem 0 0.45rem;
+  padding: 0.22rem 0 0.62rem;
   outline: none;
 }
 
 .contact-field textarea {
   resize: vertical;
-  min-height: 90px;
-  max-height: 240px;
+  min-height: 130px;
+  max-height: 300px;
 }
 
 .contact-field input:focus,
 .contact-field textarea:focus {
-  border-bottom-color: #1d8ef0;
+  border-bottom-color: rgba(15, 15, 15, 0.5);
 }
 
 .contact-field.has-error label {
@@ -106,6 +113,13 @@
 
 .contact-actions {
   grid-column: 1 / -1;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 0.45rem;
+  padding-bottom: 1.8rem;
 }
 
 .contact-submit {
@@ -117,20 +131,27 @@
   font-size: clamp(1rem, 1.3vw, 1.2rem);
   padding: 0.58rem 1.3rem;
   cursor: pointer;
-  transition: transform 180ms ease, border-color 180ms ease;
+  transition: background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
 }
 
 .contact-submit:hover,
 .contact-submit:focus-visible {
-  transform: translateY(-2px);
-  border-color: #1d8ef0;
+  background-color: #f5f5e8;
+  border-color: rgba(15, 15, 15, 0.5);
+  box-shadow: 0 6px 16px rgba(15, 15, 15, 0.08);
 }
 
 .contact-form-feedback {
-  margin: 0.7rem 0 0;
-  color: #2b2b2b;
+  position: absolute;
+  left: 50%;
+  top: calc(100% - 1.1rem);
+  transform: translateX(-50%);
+  margin: 0;
+  color: #9a2f2f;
   font-size: clamp(0.95rem, 1.2vw, 1.05rem);
   min-height: 1.4em;
+  white-space: nowrap;
+  text-align: center;
 }
 
 .contact-divider {
@@ -162,11 +183,17 @@
 
   .contact-form {
     grid-template-columns: 1fr;
-    gap: 1.05rem;
+    gap: 1.15rem;
   }
 
   .contact-field-wide,
   .contact-actions {
     grid-column: 1;
+  }
+
+  .contact-actions {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
   }
 }
